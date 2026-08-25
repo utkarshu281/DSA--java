@@ -1,47 +1,47 @@
 package Algorithm.Sorting.SortingTwo.MergeSort;
-
 public class MyMergeSort {
-    public static void main(String[] args) {
-        int[] arr={9,3,7,5,6,4,8,2};
-        int[] sortedArray = mergeSort(arr,0,arr.length-1);
+    public static void main() {
+        int[] arr={10,4,43,5,57,91,45,9,7};
+        int[] sortedArray=myMergeSort(arr,0,arr.length-1);
         for(int num:sortedArray){
             System.out.println(num);
         }
+
     }
-    public static int[] mergeSort(int[] arr,int low,int high){
-        int[] finalArray = new int[100];
-       finalArray= divide(arr,low,high);
+    public static int[] myMergeSort(int[] arr, int start, int end){
+        int[] finalArray = new int[arr.length+1];//+1 is extra
+        finalArray=divide(arr,start,end);
         return finalArray;
     }
-    public static int[] divide(int[] arr,int low,int high){
-        int[] newArray = null;
-        if (low == high) {
-            return new int[]{arr[low]};
+    public static int[] divide(int[] arr, int start, int end){
+        int[] newArray;
+        if(start==end){
+            return new int[]{arr[start]};
         }
-            int mid=low+(high-low)/2;
-            var left=divide(arr,low,mid);
-            var right=divide(arr,mid+1,high);
-           newArray= merge(left,right);
-
+        int mid=(start+(end-start)/2);
+        var leftPart=divide(arr,start,mid);
+        var rightPart=divide(arr,mid+1,end);
+        newArray= merge(arr,leftPart,rightPart);
         return newArray;
     }
-    public static int[] merge(int[] left, int[] right){
-        int[] finalResult = new int[left.length+right.length];
-        int i=0,j=0,c=0;
-        while(i<left.length && j<right.length){
-            if (left[i]<right[j]){
-                finalResult[c++]=left[i++];
+    public static int[] merge(int[] arr,int[] leftPart,int[] rightPart){
+        int[] result = new int[leftPart.length+rightPart.length];
+        int k=0,i=0,j=0;
+        while(i<leftPart.length && j<rightPart.length){
+            if(leftPart[i]<=rightPart[j]){
+                result[k++]=leftPart[i++];
             }else{
-                finalResult[c++]=right[j++];
+                result[k++]=rightPart[j++];
             }
-        }
-        while(i<left.length){
-            finalResult[c++]=left[i++];
-        }
-        while(j<right.length){
-            finalResult[c++]=right[j++];
 
         }
-        return finalResult;
+        while(i<leftPart.length){
+            result[k++]=leftPart[i++];
+
+        }while(j<rightPart.length){
+            result[k++]=rightPart[j++];
+
+        }
+        return result;
     }
 }

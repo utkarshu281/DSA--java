@@ -14,7 +14,7 @@ public class OptimizedBubbleSort {
     public static int[] bubbleSort(int[] arr){
         int temp;
         //swapped variable to not wast any more iteration on already sorted array-why?
-        //becuz if now swaps happens that mean array is alreay sorted
+        //becuz if no swaps happens that mean array is alreay sorted
         boolean swapped=true;
         for(int i=0;i<arr.length-1;i++){
             swapped=false;
